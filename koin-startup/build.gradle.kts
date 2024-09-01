@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin)
+    id("maven-publish")
 }
 
 android {
@@ -44,4 +45,22 @@ dependencies {
     api(libs.koin.android)
 
     api(libs.startup.android)
+}
+
+fun extraString(key: String): String {
+    return extra[key] as String
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            register<MavenPublication>("release") {
+                from(components["release"])
+                groupId = extraString("group_id")
+                artifactId = extraString("artifact_id")
+                version = extraString("lib_version")
+            }
+        }
+    }
 }
