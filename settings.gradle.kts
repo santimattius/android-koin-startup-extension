@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "android-startup"
+rootProject.name = "android-koin-startup-extension"
 include(":app")
 include(":koin-startup")
 include(":feature")
