@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.startup.Initializer
 import com.santimattius.android.koin.startup.internal.ModuleLoader
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.context.startKoin
 import org.koin.core.lazyModules
+import org.koin.core.logger.Level
 import org.koin.core.module.Module
 
 typealias ApplicationModules = Pair<List<Module>, List<Lazy<Module>>>
@@ -20,6 +22,8 @@ class KoinInitializer : Initializer<Unit> {
         val (syncModules, lazyModules) = extractModules(context)
         startKoin {
             androidContext(context)
+            androidLogger(Level.INFO)
+            allowOverride(false)
             modules(syncModules)
             lazyModules(lazyModules)
         }
@@ -31,7 +35,7 @@ class KoinInitializer : Initializer<Unit> {
 
     private fun extractModules(context: Context): ApplicationModules {
         val featureModules = moduleLoader.load()
-        return if (context is KoinModules) {
+        return if (context is KoinDefinition) {
             val mergedModules = context.modules() + featureModules.modules()
             val mergedLazyModules = context.lazyModules() + featureModules.lazyModules()
             mergedModules to mergedLazyModules

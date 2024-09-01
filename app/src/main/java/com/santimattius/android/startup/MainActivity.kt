@@ -24,20 +24,20 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.santimattius.android.feature.FeatureActivity
+import com.santimattius.android.startup.service.AppService
 import com.santimattius.android.startup.service.CrashTrackerService
-import com.santimattius.android.startup.service.ServiceExample
 import com.santimattius.android.startup.ui.theme.AndroidStartupTheme
 import org.koin.android.ext.android.inject
 
 
 class MainActivity : ComponentActivity() {
 
-    private val service by inject<ServiceExample>()
+    private val service by inject<AppService>()
+
     private val crashTrackerService by inject<CrashTrackerService>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        service.execute()
         setContent {
             AndroidStartupTheme {
                 // A surface container using the 'background' color from the theme
@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting(
-                        title = "Android Startup with Hilt",
+                        title = service.sayHello("Koin"),
                         description = "Service initialized: ${crashTrackerService.isInitialized}"
                     )
                 }
@@ -87,7 +87,7 @@ fun Greeting(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Hello $title!",
+                    text = "$title!",
                     style = MaterialTheme.typography.titleLarge
                 )
                 Text(

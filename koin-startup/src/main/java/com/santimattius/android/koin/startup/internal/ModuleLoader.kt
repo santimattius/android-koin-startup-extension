@@ -1,15 +1,15 @@
 package com.santimattius.android.koin.startup.internal
 
 import android.util.Log
-import com.santimattius.android.koin.startup.KoinModules
+import com.santimattius.android.koin.startup.KoinDefinition
 import org.koin.core.module.Module
 import java.util.ServiceLoader
 
 internal class ModuleLoader {
 
-    fun load(): KoinModules = try {
-        val providers = mutableListOf<KoinModules>()
-        val loader = ServiceLoader.load(KoinModules::class.java, this.javaClass.classLoader)
+    fun load(): KoinDefinition = try {
+        val providers = mutableListOf<KoinDefinition>()
+        val loader = ServiceLoader.load(KoinDefinition::class.java, this.javaClass.classLoader)
         for (provider in loader) {
             providers.add(provider)
         }
@@ -21,10 +21,10 @@ internal class ModuleLoader {
             modules.addAll(it.modules())
             lazyModules.addAll(it.lazyModules())
         }
-        MergedKoinModules(modules, lazyModules)
+        MergedKoinDefinition(modules, lazyModules)
     } catch (ex: Throwable) {
         Log.e("ModuleLoader", "load: fail load service loader modules", ex)
-        DefaultKoinModules
+        DefaultKoinDefinition
     }
 }
 

@@ -2,7 +2,7 @@ package com.santimattius.android.koin.startup
 
 import org.koin.core.module.Module
 
-interface KoinModules {
+interface KoinDefinition {
 
     fun modules(): List<Module>
 

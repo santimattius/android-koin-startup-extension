@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,7 +28,7 @@ class FeatureActivity : ComponentActivity() {
             FeatureModuleTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        message = featureServices.sayHello("Android"),
+                        message = featureServices.sayHello("Koin"),
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -43,7 +44,8 @@ fun Greeting(message: String, modifier: Modifier = Modifier) {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Hello $message!",
+            text = "$message!",
+            style = MaterialTheme.typography.titleLarge
         )
     }
 }
