@@ -14,20 +14,20 @@ Koin-startup is a powerful library that significantly extends the use of Koin wi
 You can add this library to your Android project using Gradle. Make sure to include the repository in your project-level `build.gradle` file:
 
 ```groovy
-	dependencyResolutionManagement {
-		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-		repositories {
-			mavenCentral()
-			maven { url 'https://jitpack.io' }
-		}
+dependencyResolutionManagement {
+	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+	repositories {
+		mavenCentral()
+		maven { url 'https://jitpack.io' }
 	}
+}
 ```
 
 Then, add the dependency in your `build.gradle` file at the application level:
 
 ```groovy
 dependencies {
-	 implementation "com.santimattius.android:koin-startup:${version}"
+   implementation "com.santimattius.android:koin-startup:${version}"
 }
 
 ```
@@ -92,11 +92,16 @@ private val featureModule = module {
 
 Similar to what we did for the `Application` class, for `koin-startup` to recognize our implementation of `KoinDefinition` in our module, we must define the `META-INF/services` file. For this, within the resources directory of our feature module, we will set up the following structure:
 
-[Image]
+<p align="center">
+  <img width="600" src="https://github.com/santimattius/android-koin-startup-extension/blob/main/docs/feature-module.png?raw=true" alt="META-INF/services"/>
+</p>
 
 There we will have a file named `com.santimattius.android.koin.startup.KoinDefinition`, which will contain the reference to our implementation of `KoinDefinition`.
 
-[Image]
+<p align="center">
+  <img width="600" src="https://github.com/santimattius/android-koin-startup-extension/blob/main/docs/feature-module-def.png?raw=true" alt="Definition"/>
+</p>
+
 
 ## Support for Other App Startup Initializers
 
@@ -185,4 +190,4 @@ Contributions are welcome! If you want to contribute to this library, please fol
 
 ## Contact
 
-If you have questions, issues, or suggestions regarding this library, feel free to [open a new issue](https://github.com/tuusuario/AndroidXYZ/issues) on GitHub. We are here to help you!
+If you have questions, issues, or suggestions regarding this library, feel free to [open a new issue](https://github.com/santimattius/android-koin-startup-extension/issues) on GitHub. We are here to help you!
