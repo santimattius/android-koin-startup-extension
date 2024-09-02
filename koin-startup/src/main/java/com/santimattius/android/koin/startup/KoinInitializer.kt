@@ -11,17 +11,32 @@ import org.koin.core.lazyModules
 import org.koin.core.logger.Level
 import org.koin.core.module.Module
 
-typealias ApplicationModules = Pair<List<Module>, List<Lazy<Module>>>
+private typealias ApplicationModules = Pair<List<Module>, List<Lazy<Module>>>
 
+/**
+ * Koin initializer for Android applications.
+ *
+ * This class is responsible for initializing the Koin dependency injection framework
+ * during the application startup process. It loads modules from various sources,
+ * including the application class and feature modules, and configures the Koin instance.
+ */
 class KoinInitializer : Initializer<Unit> {
 
     private val moduleLoader = ModuleLoader()
 
+    /**
+     * Initializes Koin with the provided application context.
+     *
+     * This method loads modules, configures the Koin instance, and starts Koin.
+     *
+     * @param context The application context.
+     */
     @OptIn(KoinExperimentalAPI::class)
     override fun create(context: Context) {
         val (syncModules, lazyModules) = extractModules(context)
         startKoin {
             androidContext(context)
+            //TODO:next version set this from config
             androidLogger(Level.INFO)
             allowOverride(false)
             modules(syncModules)
@@ -29,10 +44,21 @@ class KoinInitializer : Initializer<Unit> {
         }
     }
 
+    /**
+     * Specifies that this initializer has no dependencies.
+     *
+     * @return An empty list of initializer classes.
+     */
     override fun dependencies(): List<Class<out Initializer<*>>> {
         return emptyList()
     }
 
+    /**
+     * Extracts Koin modules from the application context and feature modules.
+     *
+     * @param context The application context.
+     * @return A pair of module lists: eagerly loaded modules and lazily loaded modules.
+     */
     private fun extractModules(context: Context): ApplicationModules {
         val featureModules = moduleLoader.load()
         return if (context is KoinDefinition) {
