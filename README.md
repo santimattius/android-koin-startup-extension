@@ -1,5 +1,7 @@
 [![](https://jitpack.io/v/santimattius/android-koin-startup-extension.svg)](https://jitpack.io/#santimattius/android-koin-startup-extension)
 
+![image - Page 2(1)](https://github.com/user-attachments/assets/ae2e57e4-570b-486d-a175-8ecc7d85863d)
+
 # Koin Android Startup Extension
 Koin-startup is a powerful library that significantly extends the use of Koin with App Startup. This tool greatly simplifies the configuration of Koin and its dependencies by providing comprehensive support for handling multiple modules in an application.
 
