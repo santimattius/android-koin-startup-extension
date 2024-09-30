@@ -31,7 +31,6 @@ class KoinInitializer : Initializer<Unit> {
      *
      * @param context The application context.
      */
-    @OptIn(KoinExperimentalAPI::class)
     override fun create(context: Context) {
         val (syncModules, lazyModules) = extractModules(context)
         startKoin {

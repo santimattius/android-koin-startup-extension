@@ -52,6 +52,7 @@ composeCompiler {
 dependencies {
 
     implementation(project(":koin-startup"))
+//    implementation("com.github.santimattius:android-koin-startup-extension:1.0.0-alpha01")
     implementation(libs.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

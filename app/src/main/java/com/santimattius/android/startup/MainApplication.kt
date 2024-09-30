@@ -3,6 +3,7 @@ package com.santimattius.android.startup
 import android.app.Application
 import android.util.Log
 import com.santimattius.android.koin.startup.KoinDefinition
+import com.santimattius.android.koin.startup.KoinFeatureExperimental
 import com.santimattius.android.koin.startup.ModuleScope
 import com.santimattius.android.startup.service.CrashTrackerService
 import com.santimattius.android.startup.service.AppService
@@ -20,6 +21,7 @@ class MainApplication : Application(), KoinDefinition {
         return listOf(appModule)
     }
 
+    @OptIn(KoinFeatureExperimental::class)
     override fun scope() = ModuleScope.APP
 }
 
