@@ -9,8 +9,12 @@
             android:exported="false"
             tools:node="merge">
 
+<!--            <meta-data-->
+<!--                android:name="com.santimattius.android.koin.startup.KoinInitializer"-->
+<!--                android:value="androidx.startup" />-->
+
             <meta-data
-                android:name="com.santimattius.android.koin.startup.KoinInitializer"
+                android:name="com.santimattius.android.koin.startup.KoinSingleInitializer"
                 android:value="androidx.startup" />
         </provider>
     </application>
