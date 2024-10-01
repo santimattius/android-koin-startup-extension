@@ -18,12 +18,10 @@ class MainApplication : Application(), KoinDeclaration {
         Log.i(this::class.simpleName, "onCreate: application created")
     }
 
-    override fun declaration(): KoinAppDeclaration {
-        return {
-            androidLogger(Level.DEBUG)
-            androidContext(this@MainApplication)
-            modules(appModule)
-        }
+    override fun declaration(): KoinAppDeclaration = {
+        androidLogger(Level.DEBUG)
+        androidContext(this@MainApplication)
+        modules(appModule)
     }
 }
 
