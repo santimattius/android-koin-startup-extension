@@ -1,7 +1,5 @@
 package com.santimattius.android.koin.startup
 
-import org.koin.core.module.Module
-
 
 /**
  * Definition for Koin modules and configurations.
@@ -11,24 +9,7 @@ import org.koin.core.module.Module
  */
 interface KoinDefinition {
 
-    /**
-     * Returns a list of modules to be loaded by Koin.
-     *
-     * These modules define the core dependencies for your application.
-     *
-     * @return List of [Module] objects.
-     */
-    fun modules(): List<Module>
-
-    /**
-     * Returns a list of lazily initialized modules.
-     *
-     * Lazy modules are only loaded when they are first accessed,
-     * which can improve startup performance.
-     *
-     * @return List of [Lazy] loaded [Module] objects.
-     */
-    fun lazyModules(): List<Lazy<Module>> = emptyList()
+    fun modules(): KoinModules
 
     /**
      * Defines the scope for the modules.
@@ -39,5 +20,13 @@ interface KoinDefinition {
      */
     @KoinFeatureExperimental
     fun scope() = ModuleScope.NONE
+}
+
+interface KoinAppDefinition : KoinDefinition {
+
+    @OptIn(KoinFeatureExperimental::class)
+    override fun scope(): ModuleScope {
+        return ModuleScope.APP
+    }
 }
 

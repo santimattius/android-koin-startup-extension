@@ -1,13 +1,13 @@
 package com.santimattius.android.feature
 
 import com.santimattius.android.koin.startup.KoinDefinition
-import org.koin.core.module.Module
+import com.santimattius.android.koin.startup.koinModules
 import org.koin.dsl.module
 
 class FeatureKoinModule : KoinDefinition {
 
-    override fun modules(): List<Module> {
-        return listOf(featureModule)
+    override fun modules() = koinModules {
+        module(featureModule)
     }
 }
 

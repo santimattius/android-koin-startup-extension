@@ -12,4 +12,5 @@ package com.santimattius.android.koin.startup
     AnnotationTarget.FIELD,
     AnnotationTarget.CONSTRUCTOR,
 )
+@Retention(AnnotationRetention.BINARY)
 annotation class KoinFeatureExperimental

@@ -5,7 +5,6 @@ import androidx.startup.Initializer
 import com.santimattius.android.koin.startup.internal.ModuleLoader
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.context.startKoin
 import org.koin.core.lazyModules
 import org.koin.core.logger.Level
@@ -32,12 +31,15 @@ class KoinInitializer : Initializer<Unit> {
      * @param context The application context.
      */
     override fun create(context: Context) {
+        if (context !is KoinAppDefinition) {
+            error("The application context must implement KoinAppDefinition")
+        }
+
         val (syncModules, lazyModules) = extractModules(context)
         startKoin {
             androidContext(context)
-            //TODO:next version set this from config
             androidLogger(Level.INFO)
-            allowOverride(false)
+            allowOverride(override = false)
             modules(syncModules)
             lazyModules(lazyModules)
         }
@@ -55,17 +57,15 @@ class KoinInitializer : Initializer<Unit> {
     /**
      * Extracts Koin modules from the application context and feature modules.
      *
-     * @param context The application context.
+     * @param koinAppDefinition The application context implementing KoinAppDefinition.
      * @return A pair of module lists: eagerly loaded modules and lazily loaded modules.
      */
-    private fun extractModules(context: Context): ApplicationModules {
-        val featureModules = moduleLoader.load()
-        return if (context is KoinDefinition) {
-            val mergedModules = context.modules() + featureModules.modules()
-            val mergedLazyModules = context.lazyModules() + featureModules.lazyModules()
-            mergedModules to mergedLazyModules
-        } else {
-            featureModules.modules() to featureModules.lazyModules()
-        }
+    private fun extractModules(koinAppDefinition: KoinAppDefinition): ApplicationModules {
+        val librariesModules = moduleLoader.load()
+        val (appModules, appLazyModules) = koinAppDefinition.modules()
+        val (featureModules, featureLazyModules) = librariesModules.modules()
+        val mergedModules = appModules + featureModules
+        val mergedLazyModules = appLazyModules + featureLazyModules
+        return mergedModules to mergedLazyModules
     }
 }

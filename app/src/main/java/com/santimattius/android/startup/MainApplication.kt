@@ -2,27 +2,22 @@ package com.santimattius.android.startup
 
 import android.app.Application
 import android.util.Log
-import com.santimattius.android.koin.startup.KoinDefinition
-import com.santimattius.android.koin.startup.KoinFeatureExperimental
-import com.santimattius.android.koin.startup.ModuleScope
-import com.santimattius.android.startup.service.CrashTrackerService
+import com.santimattius.android.koin.startup.KoinAppDefinition
+import com.santimattius.android.koin.startup.koinModules
 import com.santimattius.android.startup.service.AppService
-import org.koin.core.module.Module
+import com.santimattius.android.startup.service.CrashTrackerService
 import org.koin.dsl.module
 
-class MainApplication : Application(), KoinDefinition {
+class MainApplication : Application(), KoinAppDefinition {
 
     override fun onCreate() {
         super.onCreate()
         Log.i(this::class.simpleName, "onCreate: application created")
     }
 
-    override fun modules(): List<Module> {
-        return listOf(appModule)
+    override fun modules() = koinModules {
+        module(appModule)
     }
-
-    @OptIn(KoinFeatureExperimental::class)
-    override fun scope() = ModuleScope.APP
 }
 
 val appModule = module {

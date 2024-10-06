@@ -1,11 +1,9 @@
 package com.santimattius.android.koin.startup.internal
 
 import com.santimattius.android.koin.startup.KoinDefinition
-import org.koin.core.module.Module
+import com.santimattius.android.koin.startup.KoinModules
 
 internal object DefaultKoinDefinition : KoinDefinition {
 
-    override fun modules() = emptyList<Module>()
-
-    override fun lazyModules() = emptyList<Lazy<Module>>()
+    override fun modules() = KoinModules()
 }
