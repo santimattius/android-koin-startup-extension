@@ -26,8 +26,12 @@ import org.koin.mp.KoinPlatformTools
  */
 abstract class KoinStartupExtensionInitializer<T> : Initializer<T> {
 
-    override fun dependencies(): MutableList<Class<out Initializer<*>>> {
-        return mutableListOf(KoinInitializer::class.java)
+    override fun dependencies(): List<Class<out Initializer<*>>> {
+        return mutableListOf(KoinInitializer::class.java) + dependOn()
+    }
+
+    open fun dependOn(): List<Class<out Initializer<*>>> {
+        return emptyList()
     }
 
     /**

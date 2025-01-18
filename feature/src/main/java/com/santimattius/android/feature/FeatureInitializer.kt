@@ -8,4 +8,5 @@ class FeatureInitializer : KoinStartupExtensionInitializer<Unit>() {
     override fun create(context: Context) {
         loadLazyModules(featureModule)
     }
+
 }

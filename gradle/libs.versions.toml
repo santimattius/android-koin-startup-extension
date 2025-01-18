@@ -44,6 +44,9 @@ koin-androidx-startup = { group = "io.insert-koin", name = "koin-androidx-startu
 
 startup-android = { module = "androidx.startup:startup-runtime", version.ref = "startupAndroid" }
 
+koin-startup-extension-local = { module = "com.santimattius.android:koin-startup-extension", version = "2.0.0-alpha01" }
+koin-startup-extension-remote = { module = "com.github.santimattius:android-koin-startup-extension", version = "2.0.0-alpha01" }
+
 #Testing
 espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
 junit = { module = "junit:junit", version.ref = "junit" }
