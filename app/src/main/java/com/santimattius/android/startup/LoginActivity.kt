@@ -91,8 +91,10 @@ fun KoinLoginScreen() {
             Spacer(modifier = Modifier.height(24.dp))
 
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = userName,
+                onValueChange = { newUserName ->
+                    userName = newUserName
+                },
                 label = { Text("Username, email or mobile number") },
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -100,8 +102,10 @@ fun KoinLoginScreen() {
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = password,
+                onValueChange = { newPassword ->
+                    password = newPassword
+                },
                 label = { Text("Password") },
                 modifier = Modifier.fillMaxWidth(),
                 visualTransformation = PasswordVisualTransformation(),

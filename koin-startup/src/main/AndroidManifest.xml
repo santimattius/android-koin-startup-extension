@@ -3,6 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application>
-
+        <provider
+            android:name="com.santimattius.android.koin.startup.KoinBackgroundInitializerProvider"
+            android:authorities="${applicationId}.koin.androidx-startup"
+            android:process=":secondary"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="org.koin.androix.startup.KoinInitializer"
+                android:value="androidx.startup" />
+        </provider>
     </application>
 </manifest>

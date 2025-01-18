@@ -15,6 +15,8 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
+    resourcePrefix = "koin_startup_extension_"
+
     buildTypes {
         release {
             isMinifyEnabled = false

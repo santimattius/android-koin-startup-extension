@@ -7,12 +7,12 @@
             android:name=".FeatureActivity"
             android:exported="false"
             android:label="@string/title_activity_feature"
+            android:process=":secondary"
             android:theme="@style/Theme.FeatureModule" />
 
         <provider
             android:name="com.santimattius.android.koin.startup.KoinBackgroundInitializerProvider"
-            android:authorities="${applicationId}.androidx-startup"
-            android:process=":koin-background-initializer"
+            android:authorities="${applicationId}.koin.androidx-startup"
             android:exported="false"
             tools:node="merge">
 

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="koin_startup_extension_process">:secondary</string>
+</resources>

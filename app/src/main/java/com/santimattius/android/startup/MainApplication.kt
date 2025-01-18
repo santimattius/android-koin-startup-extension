@@ -9,6 +9,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.dsl.KoinConfiguration
 import org.koin.dsl.module
+import org.koin.mp.KoinPlatformTools
 
 @OptIn(KoinExperimentalAPI::class)
 class MainApplication : Application(), KoinStartupExtension {
@@ -16,6 +17,7 @@ class MainApplication : Application(), KoinStartupExtension {
     override fun onCreate() {
         super.onCreate()
         Log.i(this::class.simpleName, "onCreate: application created")
+        KoinPlatformTools.defaultContext().get()
     }
 
     override fun onKoinStartup(): KoinConfiguration {
