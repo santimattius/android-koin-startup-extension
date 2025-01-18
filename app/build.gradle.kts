@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.baselineprofile)
 }
 
 android {
@@ -29,6 +30,12 @@ android {
                 "proguard-rules.pro"
             )
         }
+        create("benchmark") {
+            initWith(buildTypes.getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -52,8 +59,9 @@ composeCompiler {
 
 dependencies {
 
-//    implementation("com.github.santimattius:android-koin-startup-extension:1.0.0-alpha01")
-    implementation(project(":koin-startup"))
+//    implementation(libs.koin.startup.extension.local)
+    implementation(libs.koin.startup.extension.remote)
+//    implementation(project(":koin-startup"))
     implementation(project(":feature"))
 
     implementation(libs.core.ktx)
@@ -70,6 +78,7 @@ dependencies {
 
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
+    implementation(libs.androidx.profileinstaller)
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.ext.junit)
@@ -77,6 +86,7 @@ dependencies {
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    "baselineProfile"(project(":baselineprofile"))
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 }

@@ -21,7 +21,7 @@ class MainApplication : Application(), KoinStartupExtension {
     override fun onKoinStartup(): KoinConfiguration {
         return KoinConfiguration {
             androidContext(this@MainApplication)
-            modules(appModule)
+            modules(listOf(appModule))
         }
     }
 }

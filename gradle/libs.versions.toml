@@ -15,6 +15,10 @@ material = "1.12.0"
 
 startupAndroid = "1.2.0"
 koin = "4.0.1"
+uiautomator = "2.3.0"
+benchmarkMacroJunit4 = "1.3.3"
+baselineprofile = "1.2.4"
+profileinstaller = "1.4.1"
 
 [libraries]
 #Compose
@@ -45,15 +49,20 @@ koin-androidx-startup = { group = "io.insert-koin", name = "koin-androidx-startu
 startup-android = { module = "androidx.startup:startup-runtime", version.ref = "startupAndroid" }
 
 koin-startup-extension-local = { module = "com.santimattius.android:koin-startup-extension", version = "2.0.0-alpha01" }
-koin-startup-extension-remote = { module = "com.github.santimattius:android-koin-startup-extension", version = "2.0.0-alpha01" }
+koin-startup-extension-remote = { module = "com.github.santimattius:android-koin-startup-extension", version = "2.0.0-alpha02" }
 
 #Testing
 espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
 junit = { module = "junit:junit", version.ref = "junit" }
 ext-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
+androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
+androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
+androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinGradlePlugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlinGradlePlugin" }
+android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
+baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprofile" }

@@ -52,8 +52,8 @@ composeCompiler {
 dependencies {
 
 //    implementation(libs.koin.startup.extension.local)
-//    implementation(libs.koin.startup.extension.remote)
-    implementation(project(":koin-startup"))
+    implementation(libs.koin.startup.extension.remote)
+//    implementation(project(":koin-startup"))
     implementation(libs.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
