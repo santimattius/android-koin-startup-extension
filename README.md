@@ -3,7 +3,7 @@
 ![image - Page 2(1)](https://github.com/user-attachments/assets/ae2e57e4-570b-486d-a175-8ecc7d85863d)
 
 # Koin Android Startup Extension
-Koin-startup is a powerful library that significantly extends the use of Koin with App Startup. This tool greatly simplifies the configuration of Koin and its dependencies by providing comprehensive support for handling multiple modules in an application.
+Koin-startup-extension is a powerful library that significantly extends the use of Koin with App Startup. This tool greatly simplifies the configuration of Koin and its dependencies by providing comprehensive support for handling multiple modules in an application.
 
 # Features
 
@@ -39,7 +39,8 @@ Replace `version` with the version of the library you want to use.
 
 # Usage
 
-The `koin-startup-extension` library is designed to simplify dependency management in Android applications, allowing for easy integration with App Startup. We will use practical examples to illustrate how to implement `koin-startup` in different scenarios, such as the initialization of critical services, efficient management of feature modules, and compatibility with other App Startup initializers.
+The `koin-startup-extension` library is designed to simplify dependency management in Android applications, allowing for easy integration with App Startup. 
+We will use practical examples to illustrate how to implement `koin-startup-extension` in different scenarios, such as the initialization of critical services, efficient management of feature modules, and compatibility with other App Startup initializers.
 
 ## App
 
@@ -83,11 +84,15 @@ Similarly to the default Koin setup, but without specifying the `startKoin` func
 First, we need to create an implementation of `KoinStartupExtensionInitializer` in our feature module.
 
 ```kotlin
-class FeatureInitializer : Initializer<Unit> by KoinStartupExtensionInitializer() {
+import android.content.Context
+import com.santimattius.android.koin.startup.KoinStartupExtensionInitializer
+
+class FeatureInitializer : KoinStartupExtensionInitializer<Unit>() {
 
     override fun create(context: Context) {
         loadLazyModules(featureModule)
     }
+
 }
 ```
 
