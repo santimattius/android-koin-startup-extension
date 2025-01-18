@@ -3,12 +3,13 @@
 ![image - Page 2(1)](https://github.com/user-attachments/assets/ae2e57e4-570b-486d-a175-8ecc7d85863d)
 
 # Koin Android Startup Extension
-Koin-startup-extension is a powerful library that significantly extends the use of Koin with App Startup. This tool greatly simplifies the configuration of Koin and its dependencies by providing comprehensive support for handling multiple modules in an application.
+Koin-startup is a powerful library that significantly extends the use of Koin with App Startup. This tool greatly simplifies the configuration of Koin and its dependencies by providing comprehensive support for handling multiple modules in an application.
 
 # Features
 
 - **Quick Integration:** Facilitates the rapid setup of Koin in Android projects using App Startup.
 - **Multi-module Management:** Provides support for efficient management of multiple modules within an application.
+- **Dependency Initialization:** Allows for orderly initialization of dependencies through the implementation of `KoinDefinition`.
 - **Compatibility with Initializers:** Compatible with other App Startup initializers for smoother integration.
 - **Flexibility in Module Definition:** Offers flexibility to define modules both in the main application and feature modules.
 
@@ -39,8 +40,7 @@ Replace `version` with the version of the library you want to use.
 
 # Usage
 
-The `koin-startup-extension` library is designed to simplify dependency management in Android applications, allowing for easy integration with App Startup. 
-We will use practical examples to illustrate how to implement `koin-startup-extension` in different scenarios, such as the initialization of critical services, efficient management of feature modules, and compatibility with other App Startup initializers.
+The `koin-startup` library is designed to simplify dependency management in Android applications, allowing for easy integration with App Startup. We will use practical examples to illustrate how to implement `koin-startup` in different scenarios, such as the initialization of critical services, efficient management of feature modules, and compatibility with other App Startup initializers.
 
 ## App
 
@@ -49,27 +49,25 @@ In the code of our Android application, specifically in our `Application` class,
 ```kotlin
 import android.app.Application
 import android.util.Log
-import com.santimattius.android.koin.startup.KoinStartupExtension
+import com.santimattius.android.koin.startup.KoinDefinition
+import com.santimattius.android.koin.startup.ModuleScope
+import com.santimattius.android.startup.service.CrashTrackerService
 import com.santimattius.android.startup.service.AppService
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.annotation.KoinExperimentalAPI
-import org.koin.dsl.KoinConfiguration
+import org.koin.core.module.Module
 import org.koin.dsl.module
 
-@OptIn(KoinExperimentalAPI::class)
-class MainApplication : Application(), KoinStartupExtension {
+class MainApplication : Application(), KoinDefinition {
 
     override fun onCreate() {
         super.onCreate()
         Log.i(this::class.simpleName, "onCreate: application created")
     }
 
-    override fun onKoinStartup(): KoinConfiguration {
-        return KoinConfiguration {
-            androidContext(this@MainApplication)
-            modules(appModule)
-        }
+    override fun modules(): List<Module> {
+        return listOf(appModule)
     }
+
+    override fun scope() = ModuleScope.APP
 }
 
 val appModule = module {
@@ -81,20 +79,33 @@ Similarly to the default Koin setup, but without specifying the `startKoin` func
 
 ### Feature Modules
 
-First, we need to create an implementation of `KoinStartupExtensionInitializer` in our feature module.
+First, we need to create an implementation of `KoinDefinition` in our feature module.
 
 ```kotlin
-import android.content.Context
-import com.santimattius.android.koin.startup.KoinStartupExtensionInitializer
+class FeatureKoinModule : KoinDefinition {
 
-class FeatureInitializer : KoinStartupExtensionInitializer<Unit>() {
-
-    override fun create(context: Context) {
-        loadLazyModules(featureModule)
+    override fun modules(): List<Module> {
+        return listOf(featureModule)
     }
+}
 
+private val featureModule = module {
+    single { FeatureServices() }
 }
 ```
+
+Similar to what we did for the `Application` class, for `koin-startup` to recognize our implementation of `KoinDefinition` in our module, we must define the `META-INF/services` file. For this, within the resources directory of our feature module, we will set up the following structure:
+
+<p align="center">
+  <img width="600" src="https://github.com/santimattius/android-koin-startup-extension/blob/main/docs/feature-module.png?raw=true" alt="META-INF/services"/>
+</p>
+
+There we will have a file named `com.santimattius.android.koin.startup.KoinDefinition`, which will contain the reference to our implementation of `KoinDefinition`.
+
+<p align="center">
+  <img width="600" src="https://github.com/santimattius/android-koin-startup-extension/blob/main/docs/feature-module-def.png?raw=true" alt="Definition"/>
+</p>
+
 
 ## Support for Other App Startup Initializers
 
@@ -120,20 +131,27 @@ class CrashTrackerService {
 For this, it is necessary to execute the `initialize` function. For example, we will define this as a dependency in the application module.
 
 ```kotlin
-@OptIn(KoinExperimentalAPI::class)
-class MainApplication : Application(), KoinStartupExtension {
+import android.app.Application
+import android.util.Log
+import com.santimattius.android.koin.startup.KoinDefinition
+import com.santimattius.android.koin.startup.ModuleScope
+import com.santimattius.android.startup.service.CrashTrackerService
+import com.santimattius.android.startup.service.AppService
+import org.koin.core.module.Module
+import org.koin.dsl.module
+
+class MainApplication : Application(), KoinDefinition {
 
     override fun onCreate() {
         super.onCreate()
         Log.i(this::class.simpleName, "onCreate: application created")
     }
 
-    override fun onKoinStartup(): KoinConfiguration {
-        return KoinConfiguration {
-            androidContext(this@MainApplication)
-            modules(appModule)
-        }
+    override fun modules(): List<Module> {
+        return listOf(appModule)
     }
+
+    override fun scope() = ModuleScope.APP
 }
 
 val appModule = module {

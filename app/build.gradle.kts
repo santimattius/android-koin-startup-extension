@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.santimattius.android.startup"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.santimattius.android.startup"
