@@ -10,8 +10,9 @@
             android:theme="@style/Theme.FeatureModule" />
 
         <provider
-            android:name="androidx.startup.InitializationProvider"
+            android:name="com.santimattius.android.koin.startup.KoinBackgroundInitializerProvider"
             android:authorities="${applicationId}.androidx-startup"
+            android:process=":koin-background-initializer"
             android:exported="false"
             tools:node="merge">
 

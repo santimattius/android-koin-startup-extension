@@ -13,16 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidStartup"
         tools:targetApi="31">
+
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AndroidStartup">
+            android:name="com.santimattius.android.startup.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.santimattius.android.startup.LoginActivity"
+            android:process=":koin-background-initializer" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"
