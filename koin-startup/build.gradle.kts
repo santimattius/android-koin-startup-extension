@@ -43,7 +43,7 @@ dependencies {
     api(libs.koin.core)
     api(libs.koin.coroutine)
     api(libs.koin.android)
-
+    api(libs.koin.androidx.startup)
     api(libs.startup.android)
 }
 

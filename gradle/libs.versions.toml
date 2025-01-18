@@ -14,7 +14,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 
 startupAndroid = "1.2.0"
-koin = "4.0.0"
+koin = "4.0.1"
 
 [libraries]
 #Compose
@@ -40,6 +40,7 @@ koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core" }
 koin-android = { group = "io.insert-koin", name = "koin-android" }
 koin-coroutine = { group = "io.insert-koin", name = "koin-core-coroutines" }
+koin-androidx-startup = { group = "io.insert-koin", name = "koin-androidx-startup" }
 
 startup-android = { module = "androidx.startup:startup-runtime", version.ref = "startupAndroid" }
 
