@@ -1,11 +1,11 @@
 [versions]
-androidGradlePlugin = "8.8.0"
-kotlinGradlePlugin = "2.0.10"
+androidGradlePlugin = "8.9.0"
+kotlinGradlePlugin = "2.1.10"
 
-activityCompose = "1.10.0"
+activityCompose = "1.10.1"
 coreKtx = "1.15.0"
 lifecycleRuntimeKtx = "2.8.7"
-androidxComposeBom = "2025.01.00"
+androidxComposeBom = "2025.03.00"
 retrofit = "2.11.0"
 espressoCore = "3.6.1"
 junit = "4.13.2"
@@ -17,7 +17,7 @@ startupAndroid = "1.2.0"
 koin = "4.0.1"
 uiautomator = "2.3.0"
 benchmarkMacroJunit4 = "1.3.3"
-baselineprofile = "1.2.4"
+baselineprofile = "1.3.3"
 profileinstaller = "1.4.1"
 
 [libraries]
