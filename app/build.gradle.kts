@@ -59,9 +59,9 @@ composeCompiler {
 
 dependencies {
 
-//    implementation(libs.koin.startup.extension.local)
-    implementation(libs.koin.startup.extension.remote)
-//    implementation(project(":koin-startup"))
+    //implementation(libs.koin.startup.extension.local)
+    //implementation(libs.koin.startup.extension.remote)
+    implementation(project(":koin-startup"))
     implementation(project(":feature"))
 
     implementation(libs.core.ktx)
