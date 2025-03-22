@@ -31,6 +31,9 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+    lint {
+        disable += "EnsureInitializerMetadata"
+    }
 }
 
 dependencies {
