@@ -21,5 +21,5 @@ rootProject.name = "android-koin-startup-extension"
 include(":app")
 include(":koin-startup")
 include(":feature")
-include(":benchmark")
-include(":baselineprofile")
+//include(":benchmark")
+//include(":baselineprofile")
