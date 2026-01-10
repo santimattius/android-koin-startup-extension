@@ -19,7 +19,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "android-koin-startup-extension"
 include(":app")
-include(":koin-startup")
+include(":koin-startup-extension")
 include(":feature")
 //include(":benchmark")
 //include(":baselineprofile")

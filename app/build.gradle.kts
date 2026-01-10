@@ -4,15 +4,20 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.baselineprofile)
 }
+val androidMinSdkVersion: String by project
+val androidTargetSdkVersion: String by project
+
+kotlin {
+    jvmToolchain(17)
+}
 
 android {
     namespace = "com.santimattius.android.startup"
-    compileSdk = 35
+    compileSdk = androidTargetSdkVersion.toInt()
 
     defaultConfig {
         applicationId = "com.santimattius.android.startup"
-        minSdk = 24
-        targetSdk = 35
+        minSdk = androidMinSdkVersion.toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -41,9 +46,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
     buildFeatures {
         compose = true
     }
@@ -61,7 +63,7 @@ dependencies {
 
     //implementation(libs.koin.startup.extension.local)
     //implementation(libs.koin.startup.extension.remote)
-    implementation(project(":koin-startup"))
+    implementation(project(":koin-startup-extension"))
     implementation(project(":feature"))
 
     implementation(libs.core.ktx)

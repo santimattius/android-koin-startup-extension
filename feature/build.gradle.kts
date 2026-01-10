@@ -3,13 +3,20 @@ plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.compose.compiler)
 }
+val androidMinSdkVersion: String by project
+val androidTargetSdkVersion: String by project
+
+
+kotlin {
+    jvmToolchain(17)
+}
 
 android {
     namespace = "com.santimattius.android.feature"
-    compileSdk = 35
+    compileSdk = androidTargetSdkVersion.toInt()
 
     defaultConfig {
-        minSdk = 24
+        minSdk = androidMinSdkVersion.toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -28,12 +35,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+
     buildFeatures {
         compose = true
     }
@@ -57,7 +62,7 @@ dependencies {
 
     //implementation(libs.koin.startup.extension.local)
     //implementation(libs.koin.startup.extension.remote)
-    implementation(project(":koin-startup"))
+    implementation(project(":koin-startup-extension"))
     implementation(libs.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
