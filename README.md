@@ -1,6 +1,6 @@
-[![](https://jitpack.io/v/santimattius/android-koin-startup-extension.svg)](https://jitpack.io/#santimattius/android-koin-startup-extension)
-
 ![image - Page 2(1)](https://github.com/user-attachments/assets/ae2e57e4-570b-486d-a175-8ecc7d85863d)
+
+[![Latest Release](https://maven-badges.sml.io/sonatype-central/io.github.santimattius.android/koin-startup-extension/badge.svg?subject=Latest%20Release&color=blue)](https://maven-badges.sml.io/sonatype-central/io.github.santimattius.android/koin-startup-extension/)
 
 # Koin Android Startup Extension
 Koin-startup-extension is a powerful library that significantly extends the use of Koin with App Startup. This tool greatly simplifies the configuration of Koin and its dependencies by providing comprehensive support for handling multiple modules in an application.
@@ -30,7 +30,7 @@ Then, add the dependency in your `build.gradle` file at the application level:
 
 ```groovy
 dependencies {
-   implementation "com.github.santimattius:android-koin-startup-extension:${version}"
+   implementation "	io.github.santimattius.android:koin-startup-extension:${version}"
 }
 
 ```
